@@ -10,25 +10,41 @@
 
 <!-- La barre haute, avec le logo et la zone de recherche -->
 <template name="header">
-  Orange!
-  <hr/>
+	<div class="navbar header-bar">
+		<div class="navbar-inner">
+			<a class="brand" href="#"><!-- NOM DE L'APPLICATION --> </a>
+		</div>
+	</div>
 </template>
 
 <!-- la barre intermediaire, avec les boutons partager/supprimer -->
 <template name="barHaut">
-  Noir!
-  <hr/>
+	<div class="navbar espace-details">
+		<div class="navbar-inner">
+			<div class="pull-left">
+				<h3> Espace 1 <!-- NOM DE L'ESPACE SELECTIONNE --></h3>
+			</div>
+			
+			<div class="pull-right actions">
+				<a href="#" class="btn btn-primary">Partager</a>
+			</div>
+		</div>
+	</div>
 </template>
 
 <!-- l'espace de travail parent (toute la largeur) -->
 <template name="content">
-  <table>
-  	<tr>
-  		<td>{{> workspaceList}}</td>
-  		<td>{{> contentCards}}</td>
-  		<td>{{> cardDetails}}</td>
-    </tr>
-  </table>
+	<div class="row-fluid">
+		<div class="span2">
+			{{> workspaceList}}
+		</div>
+		<div class="span6">
+			{{> contentCards}}
+		</div>
+		<div class="span4">
+			{{> cardDetails}}
+		</div>
+	</div>
 </template>
 
 <!-- la liste des 'espaces' -->
@@ -37,8 +53,11 @@
 		{{#each workspaces}}
 			{{> workspace}}
 		{{/each}}
-		<input type="text" class="newespacename input-small _newespacename"></input>
-		<button class="_newespacesave">+</button>
+		<div class="new-space">
+			<input type="text" class="newespacename _newespacename" value="Ajouter un espace"></input>
+			<button class="_newespacesave">+</button>
+		</div>
+
 	</div>
 </template>
 
@@ -51,11 +70,14 @@
 
 <!-- le conteneur pour les cartes -->
 <template name="contentCards">
-	<div class="cardList">
-		{{#each cards}}
-			{{> card}}
-		{{/each}}
+	<div class="row">
+		<div class="cardList span2">
+			{{#each cards}}
+				{{> card}}
+			{{/each}}
+		</div>
 	</div>
+
 	<input type="text" class="_newcardtitle"></input>
 	<button class="_newcardsave">+</button>
 </template>
