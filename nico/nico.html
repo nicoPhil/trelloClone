@@ -1,4 +1,21 @@
+<template name="categoryList">
+	<div class="categoryList">
+		Liste des categories:
+		{{#each categoryList}}
+			{{> category}}
+		{{/each}}
+		<br/>
+		NouvelleCat:<input type="text" class="_newCatName"></input>
+		<button class="_newCatSave">+</button>
+	</div>
+</template>
 
+<template name="category">
+	<div class="category">
+		<u>Categorie:'{{title}}'</u>
+		{{> contentCards}}
+	</div>
+</template>
 
 <template name="cardDetails">
 	<div class="cardDetails">

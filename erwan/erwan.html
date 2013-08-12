@@ -28,7 +28,9 @@
 			</div>
 			
 			<div class="pull-right actions">
+				<!--
 				<a href="#" class="btn btn-primary">Partager</a>
+			-->
 				{{#with workspace}}
 				{{#if name}}
 				<a href="#" class="btn btn-primary _deletewWorkspace">Supprimer Espace</a>
@@ -48,7 +50,7 @@
 		</div>
 		{{#if selectedWorkspace}}
 			<div class="span6">
-				{{> contentCards}}
+				{{> categoryList}}
 			</div>
 			{{#if selectedCard}}
 				<div class="span4">

@@ -1,0 +1,9 @@
+.category{
+	border:1px solid black;
+	padding:2px;
+}
+
+.categoryList{
+	border:1px solid red;
+	padding:2px;
+}
