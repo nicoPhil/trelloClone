@@ -24,13 +24,19 @@
 	<div class="navbar espace-details">
 		<div class="navbar-inner">
 			<div class="pull-left">
-				<h3> Espace 1 <!-- NOM DE L'ESPACE SELECTIONNE --></h3>
+				<h3> {{workspace.name}} <!-- NOM DE L'ESPACE SELECTIONNE --></h3>
 			</div>
 			
 			<div class="pull-right actions">
 				<a href="#" class="btn btn-primary">Partager</a>
+				{{#with workspace}}
+				{{#if name}}
+				<a href="#" class="btn btn-primary _deletewWorkspace">Supprimer Espace</a>
+				{{/if}}
+				{{/with}}
 			</div>
 		</div>
+		
 	</div>
 </template>
 
@@ -40,12 +46,16 @@
 		<div class="span2">
 			{{> workspaceList}}
 		</div>
-		<div class="span6">
-			{{> contentCards}}
-		</div>
-		<div class="span4">
-			{{> cardDetails}}
-		</div>
+		{{#if selectedWorkspace}}
+			<div class="span6">
+				{{> contentCards}}
+			</div>
+			{{#if selectedCard}}
+				<div class="span4">
+					{{> cardDetails}}
+				</div>
+			{{/if}}
+		{{/if}}
 	</div>
 </template>
 
@@ -56,7 +66,7 @@
 			{{> workspace}}
 		{{/each}}
 		<div class="new-space">
-			<input type="text" class="newespacename _newespacename" value="Ajouter un espace"></input>
+			<input type="text" class="newespacename _newespacename" placeholder="Ajouter un espace"></input>
 			<button class="_newespacesave">+</button>
 		</div>
 

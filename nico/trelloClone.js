@@ -2,9 +2,46 @@ workspaceColl = new Meteor.Collection("workspaceColl");
 cardColl = new Meteor.Collection("cardColl");
 
 if (Meteor.isClient) {
+
+  function selectCard(id){
+    Session.set('cardId', templ.data._id);
+  }
+
+  function selectWorkspace(id){
+      Session.set('cardId',null);
+      Session.set('workspaceId',id);
+  }
+
+  function getCardId(){
+    var cardId = Session.get('cardId');
+    return cardId
+  }
+
   Template.workspaceList.workspaces = function() {
     return workspaceColl.find();
   };
+
+  Template.content.selectedWorkspace = function() {
+    return Session.get('workspaceId');
+  }
+
+  Template.content.selectedCard = function() {
+    return getCardId();
+  }
+
+  Template.barHaut.events({
+    'click ._deletewWorkspace' : function(){
+      workspaceColl.remove({_id:this._id});
+      selectWorkspace(null);
+    }
+  });
+  
+
+  Template.barHaut.workspace = function() {
+    return workspaceColl.findOne({
+      _id: Session.get('workspaceId')
+    });
+  }
 
   Template.workspaceList.events({
     'click ._newespacesave': function(e, templ) {
@@ -16,21 +53,21 @@ if (Meteor.isClient) {
       var toInsert = {
         name: newWorkspaceName
       };
-      workspaceColl.insert(toInsert);
+      var newWorkspaceId = workspaceColl.insert(toInsert);
       textInput.val('');
-
+      Session.set('workspaceId',newWorkspaceId);
     }
 
   });
 
   Template.workspace.events({
     'click ._workspaceItem': function(e, templ) {
-      Session.set('workSpaceId', templ.data._id);
+      selectWorkspace(templ.data._id);
     }
   });
 
   Template.workspace.selected = function() {
-    return Session.equals('workSpaceId', this._id) ? 'selected' : '';
+    return Session.equals('workspaceId', this._id) ? 'selected' : '';
   }
 
   Template.card.selected = function() {
@@ -39,14 +76,11 @@ if (Meteor.isClient) {
 
   Template.contentCards.cards = function() {
     return cardColl.find({
-      workspaceId: Session.get('workSpaceId')
+      workspaceId: Session.get('workspaceId')
     })
   }
 
-function getCardId(){
-  var cardId = Session.get('cardId');
-  return cardId
-}
+
 
   Template.cardDetails.card = function() {
     return cardColl.findOne({
@@ -60,14 +94,16 @@ function getCardId(){
       var data = {
         title: templ.find("._inputTitle").value,
         description: templ.find("._inputDescription").value,
-        workspaceId: Session.get('workSpaceId')
+        workspaceId: Session.get('workspaceId')
 
       }
       cardColl.update(cardId, data);
     },
     'click ._btndelete': function(e, templ) {
       var cardId = getCardId();
-      cardColl.remove({_id:cardId});
+      cardColl.remove({
+        _id: cardId
+      });
     }
   });
 
@@ -81,7 +117,7 @@ function getCardId(){
 
   Template.contentCards.events({
     'click ._newcardsave': function(e, templ) {
-      var currentWorkspaceId = Session.get('workSpaceId');
+      var currentWorkspaceId = Session.get('workspaceId');
       if (!currentWorkspaceId) {
         return;
       }
@@ -90,10 +126,11 @@ function getCardId(){
       if (!newcardtitle) {
         return;
       }
-      cardColl.insert({
+      var newCardId = cardColl.insert({
         workspaceId: currentWorkspaceId,
         title: newcardtitle
       });
+      selectedCard(newCardId);
     },
   });
 }
