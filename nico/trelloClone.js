@@ -34,7 +34,7 @@ if (Meteor.isClient) {
   }
 
   Template.card.selected = function() {
-    return Session.equals('carId', this._id) ? 'selected' : '';
+    return Session.equals('cardId', this._id) ? 'selected' : '';
   }
 
   Template.contentCards.cards = function() {
@@ -43,9 +43,39 @@ if (Meteor.isClient) {
     })
   }
 
+function getCardId(){
+  var cardId = Session.get('cardId');
+  return cardId
+}
+
+  Template.cardDetails.card = function() {
+    return cardColl.findOne({
+      _id: getCardId()
+    });
+  }
+
+  Template.cardDetails.events({
+    'click ._btnsave': function(e, templ) {
+      var cardId = getCardId();
+      var data = {
+        title: templ.find("._inputTitle").value,
+        description: templ.find("._inputDescription").value,
+        workspaceId: Session.get('workSpaceId')
+
+      }
+      cardColl.update(cardId, data);
+    },
+    'click ._btndelete': function(e, templ) {
+      var cardId = getCardId();
+      cardColl.remove({_id:cardId});
+    }
+  });
+
+
+
   Template.card.events({
     'click ._cardItem': function(e, templ) {
-      Session.set('carId', templ.data._id);
+      Session.set('cardId', templ.data._id);
     },
   });
 

@@ -2,6 +2,17 @@
 
 <template name="cardDetails">
 	<div class="cardDetails">
-		<input type="text" value=""></input>
+		{{#with card}}
+		<button class="_btndelete">Delete</button>
+		<br><br>
+		titre:<br/>
+		<input type="text" value="{{title}}" class="_inputTitle"></input>
+		<br/>
+		description:<br/>
+		<input type="text" value="{{description}}" class="_inputDescription"></input>
+		<br/><br/>
+		<button class="_btnsave">Save</button>
+
+		{{/with}}
 	</div>
 </template>
