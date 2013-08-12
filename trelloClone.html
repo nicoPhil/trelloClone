@@ -1,0 +1,78 @@
+<head>
+  <title>trelloClone</title>
+</head>
+
+<body>
+  {{> header}}
+  {{> barHaut}}
+  {{> content}}
+</body>
+
+<!-- La barre haute, avec le logo et la zone de recherche -->
+<template name="header">
+  Orange!
+  <hr/>
+</template>
+
+<!-- la barre intermediaire, avec les boutons partager/supprimer -->
+<template name="barHaut">
+  Noir!
+  <hr/>
+</template>
+
+<!-- l'espace de travail parent (toute la largeur) -->
+<template name="content">
+  <table>
+  	<tr>
+  		<td>{{> workspaceList}}</td>
+  		<td>{{> contentCards}}</td>
+  		<td>{{> cardDetails}}</td>
+    </tr>
+  </table>
+</template>
+
+<!-- la liste des 'espaces' -->
+<template name="workspaceList">
+	<div class="workspaceList">
+		{{#each workspaces}}
+			{{> workspace}}
+		{{/each}}
+		<input type="text" class="newespacename input-small _newespacename"></input>
+		<button class="_newespacesave">+</button>
+	</div>
+</template>
+
+<!-- 1 espace -->
+<template name="workspace">
+	<div class="workspaceItem _workspaceItem {{selected}}">
+		{{name}}
+	</div>	
+</template>
+
+<!-- le conteneur pour les cartes -->
+<template name="contentCards">
+	<div class="cardList">
+		{{#each cards}}
+			{{> card}}
+		{{/each}}
+	</div>
+	<input type="text" class="_newcardtitle"></input>
+	<button class="_newcardsave">+</button>
+</template>
+
+<!-- 1 carte -->
+<template name="card">
+		<div class="cardItem _cardItem {{selected}}">
+			<span class="cardTitle">{{title}}</span>
+			<br/>
+			<div class="cardDesc">
+				{{description}}
+			</div>
+		</div>
+</template>
+
+<template name="cardDetails">
+	<div class="cardDetails">
+		<input type="text" value=""></input>
+	</div>
+</template>
