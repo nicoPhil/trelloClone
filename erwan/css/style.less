@@ -10,6 +10,7 @@ body{
 	background-color:@colorLight;
 	font-family: 'Source Sans Pro', sans-serif;
 	overflow: hidden;
+	font-size: 12px;
 }
 
 .header-bar {
@@ -39,7 +40,7 @@ body{
 
 .workspace-collection {
 	width: @widthSideBar ;
-	position: fixed;
+	position: absolute;
 	left: 0;
 	top: 105px;
 	bottom: 0;
@@ -50,17 +51,15 @@ body{
 }
 
 .content-collection {
-	position: absolute;
-	max-width: 100%;
+	position: relative;
+	width :100%;
 	margin-left: @widthSideBar ;
 	margin-right: @widthDetail + 10;
-	top: 106px;
-	bottom: 0;
-	overflow: auto;
-	padding: 10px;
+	padding-top: 10px;
+	padding-bottom: 12px;
 	.category-wrapper {
 		overflow-x: auto;
-		overflow-y: hidden;
+		overflow-y: auto;
 	}
 }
 
@@ -79,10 +78,7 @@ body{
 
 .espace-header {
 	margin-bottom:0;
-	position: fixed;
-	top: 45px;
-	right: 0;
-	left: 0;
+	position: relative;
 	.navbar-inner {
 		min-height: 60px;
 		h3 {
@@ -107,6 +103,7 @@ body{
 		padding:10px;
 		cursor: pointer;
 		color: #a3a2a0;
+		font-size: 1.2em;
 		&.selected {
 			color: lighten(@colorLight,10%);
 			font-weight: bold;
@@ -161,12 +158,19 @@ body{
 			}
 		}
 	}
+	&:first-child{
+		margin-left:10px;
+	}
 }
 
 .categoryList{
 	
 	border:none !important;
 	padding:0px !important;
+}
+
+.clearfix {
+zoom: 1;
 }
 
 .clearfix:after {
@@ -184,6 +188,7 @@ body{
 	margin-right: 10px;
 	background: white;
 	border:1px solid #e4e4e2;
+
 	.cardItem{
 		// border:1px solid #d5d5d5;	
 		padding: 15px;
@@ -197,7 +202,12 @@ body{
 	.cardTitle{
 		font-weight: bold;
 		text-transform: uppercase; 
+		font-size: 1.2em;
 	}	
+
+	.cardDesc {
+		color:#8f8c83;
+	}
 
 	.actions {
 		border-top:4px solid @mainColor;

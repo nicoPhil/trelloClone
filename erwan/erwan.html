@@ -12,7 +12,7 @@
 
 <!-- La barre haute, avec le logo et la zone de recherche -->
 <template name="header">
-	<div class="navbar header-bar navbar-fixed-top">
+	<div class="navbar header-bar">
 		<div class="navbar-inner">
 			<a class="brand" href="#"><!-- NOM DE L'APPLICATION --> </a>
 		</div>
@@ -85,7 +85,7 @@
 </template>
 
 <template name="categoryList">
-	<div class="categoryList clearfix">
+	<div class="categoryList ">
 		{{#each categoryList}}
 			{{> category}}
 		{{/each}}
