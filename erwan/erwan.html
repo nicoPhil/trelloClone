@@ -21,7 +21,7 @@
 
 <!-- la barre intermediaire, avec les boutons partager/supprimer -->
 <template name="barHaut">
-	<div class="navbar espace-details">
+	<div class="navbar espace-header">
 		<div class="navbar-inner">
 			<div class="pull-left">
 				<h3> {{workspace.name}} <!-- NOM DE L'ESPACE SELECTIONNE --></h3>
@@ -44,20 +44,22 @@
 
 <!-- l'espace de travail parent (toute la largeur) -->
 <template name="content">
-	<div class="row-fluid">
-		<div class="span2">
+	<div class="row">
+		<div class="workspace-collection">
 			{{> workspaceList}}
 		</div>
-		{{#if selectedWorkspace}}
-			<div class="span6">
-				{{> categoryList}}
-			</div>
-			{{#if selectedCard}}
-				<div class="span4">
-					{{> cardDetails}}
-				</div>
+		<div class="content-collection">
+			{{#if selectedWorkspace}}
+					{{> categoryList}}
 			{{/if}}
-		{{/if}}
+		</div>
+
+		<div class="details-collection">
+			{{#if selectedCard}}
+					{{> cardDetails}}
+			{{/if}}
+		</div>
+
 	</div>
 </template>
 
@@ -71,7 +73,6 @@
 			<input type="text" class="newespacename _newespacename" placeholder="Ajouter un espace"></input>
 			<button class="_newespacesave">+</button>
 		</div>
-
 	</div>
 </template>
 
@@ -84,23 +85,21 @@
 
 <!-- le conteneur pour les cartes -->
 <template name="contentCards">
-	<div class="row">
-		<div class="cardList span2">
-			{{#each cards}}
-				{{> card}}
-			{{/each}}
+	<div class="cardList">
+		<div class="actions">
+			<input type="text" class="newcardtitle _newcardtitle" value="Nouvelle carte..."></input>
+			<button class="_newcardsave">+</button>	
 		</div>
+		{{#each cards}}
+				{{> card}}
+		{{/each}}
 	</div>
-
-	<input type="text" class="_newcardtitle"></input>
-	<button class="_newcardsave">+</button>
 </template>
 
 <!-- 1 carte -->
 <template name="card">
 		<div class="cardItem _cardItem {{selected}}">
 			<span class="cardTitle">{{title}}</span>
-			<br/>
 			<div class="cardDesc">
 				{{description}}
 			</div>

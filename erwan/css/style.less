@@ -29,7 +29,31 @@ body{
 	}
 }
 
-.espace-details {
+.row {
+	margin-left: 0;
+}
+
+.workspace-collection {
+	width: 200px;
+	position: absolute;
+	left: 0;
+}
+
+.content-collection {
+	position: absolute;
+	max-width: 100%;
+	float: right;
+	right: 400px;
+	left:200px;
+}
+
+.details-collection {
+	width: 400px;
+	position: absolute;
+	right: 0;
+}
+
+.espace-header {
 	margin-bottom:0;
 	.navbar-inner {
 		h3 {
@@ -70,6 +94,7 @@ body{
 		.newespacename {
 			background: @sideBar;
 			border:none;
+			width: 99%;
 			&:focus {
 				border:none;
 				.box-shadow(none);
@@ -79,12 +104,17 @@ body{
 
 }
 
+
+
 .cardList {
-	padding: 10px;
+	// padding: 10px;
 	margin: 10px;
 	border:1px solid #f5f5f5;
+	width: 250px;
+	float: left;
+	background: white;
 	.cardItem{
-		border:1px solid #d5d5d5;	
+		// border:1px solid #d5d5d5;	
 		margin-top: 10px;
 		margin-bottom: 10px;
 		padding:3px;
@@ -92,11 +122,28 @@ body{
 		&.selected {
 			background-color: #d5d5d5;
 		}
+		border-bottom: 1px dashed darken(@colorLight,5%);
 	}
 
 	.cardTitle{
 		font-weight: bold;
 	}	
+
+	.actions {
+		border-top:2px solid @mainColor;
+		padding:10px;
+		// padding-bottom: 5px;
+		border-bottom: 1px dashed darken(@colorLight,5%);
+		.newcardtitle {
+			border:none;
+			background: white;
+			.box-shadow(none);
+			&:focus {
+				.box-shadow(none);
+			}
+			font-style: italic;
+		}
+	}
 }
 
 
