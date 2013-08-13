@@ -24,13 +24,10 @@
 	<div class="navbar espace-header">
 		<div class="navbar-inner">
 			<div class="pull-left">
-				<h3> {{workspace.name}} <!-- NOM DE L'ESPACE SELECTIONNE --></h3>
+				<h3> {{workspace.name}}</h3>
 			</div>
 			
 			<div class="pull-right actions">
-				<!--
-				<a href="#" class="btn btn-primary">Partager</a>
-			-->
 				{{#with workspace}}
 				{{#if name}}
 				<a href="#" class="btn btn-primary _deletewWorkspace">Supprimer Espace</a>
@@ -68,8 +65,8 @@
 <template name="workspaceList">
 	<div class="workspaceList">
 		<div class="new-space">
-			<input type="text" class="newespacename _newespacename" placeholder="Ajouter un espace"></input>
-			<button class="_newespacesave">+</button>
+			<input type="text" class="newespacename _newespacename _placeholderChange" value="Ajouter un espace"></input>
+			<button class="_newespacesave hide">+</button>
 		</div>
 		{{#each workspaces}}
 			{{> workspace}}
@@ -92,8 +89,8 @@
 		<div class="category">
 			<div class="new-category">
 				<i class="icon-list"></i>
-				<input type="text" class="_newCatName" value="Nouvelle catégorie"></input>
-				<button class="_newCatSave">+</button>	
+				<input type="text" class="_newCatName _placeholderChange" value="Nouvelle catégorie"></input>
+				<button class="_newCatSave hide">+</button>	
 			</div>
 				
 		</div>
@@ -127,8 +124,8 @@
 <template name="contentCards">
 	<div class="cardList">
 		<div class="actions">
-			<input type="text" class="newcardtitle _newcardtitle" value="Nouvelle carte..."></input>
-			<button class="_newcardsave">+</button>	
+			<input type="text" class="newcardtitle _newcardtitle _placeholderChange" value="Nouvelle carte..."></input>
+			<button class="_newcardsave hide" >+</button>	
 		</div>
 		{{#each cards}}
 				{{> card}}
