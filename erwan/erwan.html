@@ -1,5 +1,5 @@
 <head>
-  <title>trelloClone</title>
+  <title>TCM</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
 
 <!-- La barre haute, avec le logo et la zone de recherche -->
 <template name="header">
-	<div class="navbar header-bar">
+	<div class="navbar header-bar navbar-fixed-top">
 		<div class="navbar-inner">
 			<a class="brand" href="#"><!-- NOM DE L'APPLICATION --> </a>
 		</div>
@@ -44,14 +44,17 @@
 
 <!-- l'espace de travail parent (toute la largeur) -->
 <template name="content">
-	<div class="row">
 		<div class="workspace-collection">
 			{{> workspaceList}}
 		</div>
 		<div class="content-collection">
-			{{#if selectedWorkspace}}
-					{{> categoryList}}
-			{{/if}}
+			<div id="content">
+				<div class="category-wrapper">
+					{{#if selectedWorkspace}}
+						{{> categoryList}}
+					{{/if}}	
+				</div>
+			</div>
 		</div>
 
 		<div class="details-collection">
@@ -59,20 +62,18 @@
 					{{> cardDetails}}
 			{{/if}}
 		</div>
-
-	</div>
 </template>
 
 <!-- la liste des 'espaces' -->
 <template name="workspaceList">
 	<div class="workspaceList">
-		{{#each workspaces}}
-			{{> workspace}}
-		{{/each}}
 		<div class="new-space">
 			<input type="text" class="newespacename _newespacename" placeholder="Ajouter un espace"></input>
 			<button class="_newespacesave">+</button>
 		</div>
+		{{#each workspaces}}
+			{{> workspace}}
+		{{/each}}
 	</div>
 </template>
 
@@ -82,6 +83,45 @@
 		{{name}}
 	</div>	
 </template>
+
+<template name="categoryList">
+	<div class="categoryList clearfix">
+		{{#each categoryList}}
+			{{> category}}
+		{{/each}}
+		<div class="category">
+			<div class="new-category">
+				<i class="icon-list"></i>
+				<input type="text" class="_newCatName" value="Nouvelle catégorie"></input>
+				<button class="_newCatSave">+</button>	
+			</div>
+				
+		</div>
+
+	</div>
+</template>
+
+<template name="category">
+	<div class="category">
+		<h5>{{title}}</h5>
+		{{> contentCards}}
+	</div>
+</template>
+
+<template name="cardDetails">
+	<div class="cardDetails">
+		{{#with card}}
+		<button class="_btndelete">Delete</button>
+		<label for="titre">Titre</label>
+		<input id="titre" type="text" value="{{title}}" class="_inputTitle"></input>
+		<label for="description">Description</label>
+		<input id="description" type="text" value="{{description}}" class="_inputDescription"></input>
+		<button class="btn btn-success _btnsave">Save</button>
+
+		{{/with}}
+	</div>
+</template>
+
 
 <!-- le conteneur pour les cartes -->
 <template name="contentCards">
@@ -105,3 +145,5 @@
 			</div>
 		</div>
 </template>
+
+

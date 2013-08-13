@@ -9,6 +9,7 @@ div{
 body{
 	background-color:@colorLight;
 	font-family: 'Source Sans Pro', sans-serif;
+	overflow: hidden;
 }
 
 .header-bar {
@@ -29,33 +30,61 @@ body{
 	}
 }
 
+@widthSideBar : 200px;
+@widthDetail : 500px;
+
 .row {
 	margin-left: 0;
 }
 
 .workspace-collection {
-	width: 200px;
-	position: absolute;
+	width: @widthSideBar ;
+	position: fixed;
 	left: 0;
+	top: 105px;
+	bottom: 0;
+	background: @sideBar;
+	border-right: 1px solid darken(@sideBar,10%);
+	overflow-y: auto;
+	overflow-x:hidden;
 }
 
 .content-collection {
 	position: absolute;
 	max-width: 100%;
-	float: right;
-	right: 400px;
-	left:200px;
+	margin-left: @widthSideBar ;
+	margin-right: @widthDetail + 10;
+	top: 106px;
+	bottom: 0;
+	overflow: auto;
+	padding: 10px;
+	.category-wrapper {
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
 }
 
 .details-collection {
-	width: 400px;
+	width: @widthDetail;
 	position: absolute;
 	right: 0;
+	top: 106px;
+	background: #fbfbf9;
+	bottom: 0;
+	border-left: 1px solid #e8e7e3;
+	.cardDetails {
+		margin-left: 10px;
+	}
 }
 
 .espace-header {
 	margin-bottom:0;
+	position: fixed;
+	top: 45px;
+	right: 0;
+	left: 0;
 	.navbar-inner {
+		min-height: 60px;
 		h3 {
 			font-weight: 700;
 			color:@mainColor;
@@ -71,8 +100,7 @@ body{
 }
 
 .workspaceList{
-	background: @sideBar;
-	border-right: 1px solid darken(@sideBar,10%);
+
 	.workspaceItem {
 		// background-color: #d3d3d3;
 		border-left: 3px solid lighten(@sideBar,10%);
@@ -92,6 +120,7 @@ body{
 	.new-space {
 		padding: 10px;
 		.newespacename {
+			.box-shadow(none);
 			background: @sideBar;
 			border:none;
 			width: 99%;
@@ -104,33 +133,74 @@ body{
 
 }
 
+.category{
+	border:none !important;
+	padding:0px !important;
+	float: left;
+	position: relative;
+	width: 250px;
+	display: table;
+	.new-category {
+		background: @bgNewCat;
+		border-top: 4px solid darken(@bgNewCat,20%);
+		padding: 5px;
+		i {
+			position: relative;
+			top: -2px;
+			color: darken(@bgNewCat,10%);
+		}
+
+		input {
+			color: darken(@bgNewCat,25%);
+			.box-shadow(none);
+			background: @bgNewCat;
+			border:none;
+			&:focus {
+				border:none;
+				.box-shadow(none);
+			}
+		}
+	}
+}
+
+.categoryList{
+	
+	border:none !important;
+	padding:0px !important;
+}
+
+.clearfix:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
 
 
 .cardList {
 	// padding: 10px;
-	margin: 10px;
-	border:1px solid #f5f5f5;
-	width: 250px;
-	float: left;
+	margin-right: 10px;
 	background: white;
+	border:1px solid #e4e4e2;
 	.cardItem{
 		// border:1px solid #d5d5d5;	
-		margin-top: 10px;
-		margin-bottom: 10px;
-		padding:3px;
+		padding: 15px;
 		cursor: pointer;
 		&.selected {
-			background-color: #d5d5d5;
+			background-color: @colorLight;
 		}
 		border-bottom: 1px dashed darken(@colorLight,5%);
 	}
 
 	.cardTitle{
 		font-weight: bold;
+		text-transform: uppercase; 
 	}	
 
 	.actions {
-		border-top:2px solid @mainColor;
+		border-top:4px solid @mainColor;
 		padding:10px;
 		// padding-bottom: 5px;
 		border-bottom: 1px dashed darken(@colorLight,5%);
@@ -147,5 +217,16 @@ body{
 }
 
 
-
-
+.btn {
+	.rounded(3px);
+	&.btn-primary {
+		.inner-shadow-white(0, 1px, 2px,0.3);
+		border:1px solid @borderPrimary;
+		background: @bgPrimary;
+	}
+	&.btn-success {
+		.inner-shadow-white(0, 1px, 2px,0.3);
+		border:1px solid @borderSuccess;
+		background: @bgSuccess;
+	}
+}
