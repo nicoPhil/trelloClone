@@ -52,14 +52,16 @@ body{
 
 .content-collection {
 	position: relative;
-	width :100%;
+	max-width :100%;
 	margin-left: @widthSideBar ;
 	margin-right: @widthDetail + 10;
 	padding-top: 10px;
 	padding-bottom: 12px;
+	/*overflow: scroll;*/
 	.category-wrapper {
-		overflow-x: auto;
-		overflow-y: auto;
+		white-space: nowrap;
+		overflow-x:auto;
+		overflow-y:auto;
 	}
 }
 
@@ -118,9 +120,13 @@ body{
 		padding: 10px;
 		.newespacename {
 			.box-shadow(none);
+			font-weight: 200;
 			background: @sideBar;
 			border:none;
 			width: 99%;
+			font-size: 1em;
+			color:@colorLight-07;
+			margin-bottom: 0;
 			&:focus {
 				border:none;
 				.box-shadow(none);
@@ -130,13 +136,19 @@ body{
 
 }
 
+.left {
+	float: left;
+	display: inline;
+}
+
 .category{
 	border:none !important;
 	padding:0px !important;
-	float: left;
+	/*float: left;*/
 	position: relative;
 	width: 250px;
-	display: table;
+	display: inline-block;
+
 	.new-category {
 		background: @bgNewCat;
 		border-top: 4px solid darken(@bgNewCat,20%);
@@ -164,7 +176,7 @@ body{
 }
 
 .categoryList{
-	
+	/*width: 100%; CALCUL NB .CATEGORY * WIDTH CATEGORY */
 	border:none !important;
 	padding:0px !important;
 }
@@ -193,10 +205,23 @@ zoom: 1;
 		// border:1px solid #d5d5d5;	
 		padding: 15px;
 		cursor: pointer;
+
 		&.selected {
 			background-color: @colorLight;
 		}
+
 		border-bottom: 1px dashed darken(@colorLight,5%);
+
+		&:last-child{
+			border-bottom: 1px solid darken(@colorLight,5%);
+		}
+
+		
+		&:first-child {
+			border-top: 1px dashed darken(@colorLight,5%);
+			background:red;
+		}
+		
 	}
 
 	.cardTitle{
@@ -213,7 +238,7 @@ zoom: 1;
 		border-top:4px solid @mainColor;
 		padding:10px;
 		// padding-bottom: 5px;
-		border-bottom: 1px dashed darken(@colorLight,5%);
+		/*border-bottom: 1px dashed darken(@colorLight,5%);*/
 		.newcardtitle {
 			border:none;
 			background: white;
