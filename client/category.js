@@ -4,9 +4,18 @@ Template.categoryList.categoryList = function() {
 	});
 }
 
+Template.categoryList.categoryListWidth = function(){
+	var nbCat = Template.categoryList.categoryList().count();
+	var catWidth = 275;
+	var totalWidth = nbCat * catWidth;
+	return totalWidth + "px";
+}
+
 Template.categoryList.rendered = function() {
 	window.tc.setInputPlaceholder();
 }
+
+
 
 function saveNewCat(e, templ) {
 	var title = templ.find("._newCatName").value;
