@@ -1,0 +1,15 @@
+<template name="noteList">
+
+Notes:<br/>
+<input type="text" class="newnotetitle _newnotetitle _placeholderChange" value="Nouvelle note..."></input>
+<br/><br/>
+	
+	{{#each notes}}
+		{{> note}}<br/><br/>
+	{{/each}}
+
+</template>
+
+<template name="note">
+	{{title}}
+</template>
