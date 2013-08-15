@@ -11,3 +11,18 @@
 .hide{
 	display: none;
 }
+
+.tagItem{
+	padding: 1px;
+	margin: 1px;
+	border: 1px solid black;
+}
+
+.removeTag{
+	cursor: pointer;
+}
+
+.removeTag:hover{
+	color:red;
+	font-weight: bold;
+}

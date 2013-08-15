@@ -19,7 +19,6 @@ function saveNewNote(e, templ) {
 }
 
 Template.noteList.notes = function(){
-
 	var cardId = Session.get('cardId');
 	var ret =  cardColl.findOne({_id : cardId});
 	return ret.notes;
@@ -29,7 +28,6 @@ Template.noteList.notes = function(){
 Template.noteList.events({
 	'keypress ._newnotetitle': function(e, templ) {
 		if (e.keyCode == 13) {
-					debugger;
 			saveNewNote(e, templ);
 			$(templ.find("._newnotetitle")).blur();
 		}

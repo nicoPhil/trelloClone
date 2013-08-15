@@ -13,3 +13,21 @@ Notes:<br/>
 <template name="note">
 	{{title}}
 </template>
+
+
+
+<template name="tagList">
+	Tags:
+	{{#each tags}}
+		{{> tag}} 
+	{{/each}}
+	<br/>
+	<input type="text" class="newtagtitle _newtagtitle _placeholderChange" value="tag"></input>
+</template>
+
+<template name="tag">
+	<span class="tagItem">
+		<span >{{title}}</span>
+		<span class="removeTag _removeTag {{_id}}">X</span>
+	</span>
+</template>
