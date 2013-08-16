@@ -32,7 +32,7 @@ body{
 }
 
 @widthSideBar : 200px;
-@widthDetail : 500px;
+@widthDetail : 430px;
 
 .row {
 	margin-left: 0;
@@ -143,6 +143,7 @@ body{
 			font-weight: 700;
 			color:@mainColor;
 			text-transform: uppercase;
+			display: inline-block;
 		}
 		border:none;
 		.rounded(0);
@@ -150,6 +151,41 @@ body{
 		.actions {
 			margin-top: 10px;
 		}
+
+		.espace-name {
+			width:@widthSideBar - 20;
+			border-right:1px solid darken(@sideBar,10%);
+			.box-shadow(1px 0px 0px @sideBar);
+			float: left;
+			.deleteSpace {
+				position: relative;
+				top:-8px;
+			}	
+		}
+		.tagsList {
+				float: left;
+				position: relative;
+				top: 20px;
+				ul li {
+					list-style: none;
+					display: inline-block;
+				}
+				.tagItem {
+					padding: 7px;
+					border:1px solid #181a1f;
+					font-size: 1.1em;
+					.gradient(#21242b,#21242b,#32363f);
+					color:#555b6b;
+					&.selected {
+						color: white;
+						.drop-shadow(0, 0, 2px, 1)
+					}
+					&:hover {
+						color: white;
+						cursor: pointer;
+					}
+				}
+			}
 	}
 }
 
@@ -202,13 +238,15 @@ body{
 	padding:0px !important;
 	/*float: left;*/
 	position: relative;
-	width: 250px;
+	width: 180px;
 	display: inline-block;
 
 	.new-category {
 		background: @bgNewCat;
 		border-top: 4px solid darken(@bgNewCat,20%);
 		padding: 5px;
+		.box-sizing(border-box);
+			width: 100%;
 		i {
 			position: relative;
 			top: -2px;
@@ -216,6 +254,8 @@ body{
 		}
 
 		input {
+			.box-sizing(border-box);
+			width: 94%;
 			color: darken(@bgNewCat,25%);
 			.box-shadow(none);
 			background: @bgNewCat;
@@ -254,19 +294,27 @@ zoom: 1;
 .cardList {
 	// padding: 10px;
 	margin-right: 10px;
-	background: white;
-	border:1px solid #e4e4e2;
+	/*background: white;*/
+	/*border:1px solid #e4e4e2;*/
 
 	.cardItem{
-		// border:1px solid #d5d5d5;	
+		border:1px solid #e4e4e2;
 		padding: 15px;
 		cursor: pointer;
-
+		margin: 5px 0px;
+		background: white;
+		border-left:3px solid #e4e4e2;
+		.rounded(2px);
+		/*border-bottom: 1px dashed darken(@colorLight,5%);*/
 		&.selected {
-			background-color: @colorLight;
+/*			background-color: @mainColor;
+			color: white;*/
+			border:1px solid @mainColor;
+			border-left:3px solid @mainColor;
+			/*.box-shadow(0px 0px 2px 2px @mainColor);*/
 		}
 
-		border-bottom: 1px dashed darken(@colorLight,5%);
+		
 
 		&:last-child{
 			border-bottom: 1px solid darken(@colorLight,5%);
@@ -283,7 +331,11 @@ zoom: 1;
 	.cardTitle{
 		font-weight: bold;
 		text-transform: uppercase; 
-		font-size: 1.2em;
+		
+		overflow: hidden;
+		word-break: break-word;
+		white-space: normal;
+
 	}	
 
 	.cardDesc {
@@ -291,18 +343,28 @@ zoom: 1;
 	}
 
 	.actions {
-		border-top:4px solid @mainColor;
+		/*border-top:4px solid @mainColor;*/
 		padding:10px;
 		// padding-bottom: 5px;
+		background: white;
 		/*border-bottom: 1px dashed darken(@colorLight,5%);*/
+		border:1px solid #e4e4e2;
+		.inner-shadow(1px, 1px, 1px, 0.1);
+		.rounded(2px);
 		.newcardtitle {
 			border:none;
 			background: white;
 			.box-shadow(none);
+			.box-sizing(border-box);
+			width: 100%;
 			&:focus {
 				.box-shadow(none);
 			}
 			font-style: italic;
+
+		}
+		input {
+			margin-bottom: 0;
 		}
 	}
 }

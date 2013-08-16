@@ -23,16 +23,53 @@
 <template name="barHaut">
 	<div class="navbar espace-header">
 		<div class="navbar-inner">
-			<div class="pull-left">
+			<div class="espace-name">
 				<h3> {{workspace.name}}</h3>
-			</div>
-			
-			<div class="pull-right actions">
 				{{#with workspace}}
 				{{#if name}}
-				<a href="#" class="btn btn-primary _deletewWorkspace">Supprimer Espace</a>
+				<a href="#" class="btn btn-primary _deletewWorkspace deleteSpace">
+					<i class="icon-trash"></i>
+				</a>
 				{{/if}}
 				{{/with}}
+			</div>
+			<div class="tagsList">
+				<ul>
+					<li>
+							<span class="tagItem selected">
+								<span>test</span>
+								<span class="removeTag _removeTag {{_id}}">
+									<i class="icon-remove"></i>
+								</span>
+							</span>
+					</li>
+					<li>
+							<span class="tagItem selected">
+								<span>test</span>
+								<span class="removeTag _removeTag {{_id}}">
+									<i class="icon-remove"></i>
+								</span>
+							</span>
+					</li>
+
+					<li>
+							<span class="tagItem">
+								<span>test</span>
+							</span>
+					</li>
+
+					<li>
+							<span class="tagItem">
+								<span>test</span>
+							</span>
+					</li>
+
+					<li>
+							<span class="tagItem">
+								<span>test</span>
+							</span>
+					</li>
+				</ul>
 			</div>
 		</div>
 		
