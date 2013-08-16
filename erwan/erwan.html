@@ -119,9 +119,12 @@
 		<button class="btn btn-success _btnsave">Save</button>
 
 		{{/with}}
+
+		{{> tagList}}
+		{{> noteList}}
 	</div>
-				{{> noteList}}
-				{{> tagList}}
+	
+				
 </template>
 
 
@@ -146,6 +149,58 @@
 				{{description}}
 			</div>
 		</div>
+</template>
+
+<template name="noteList">
+
+	<label for="notes">Notes</label>
+	<div class="newnotetitle">
+		<i class="icon-plus"></i>
+		<input type="text" id="notes" class=" _newnotetitle _placeholderChange" value="Nouvelle note..."></input>
+	</div>
+	<!-- NE PAS AFFICHER SI PAS DE NOTES -->
+	<div class="notesList">
+		{{#each notes}}
+			{{> note}}
+		{{/each}}
+	</div>
+
+
+</template>
+
+<template name="note">
+	<div class="note">
+		{{title}}
+	</div>
+	
+</template>
+
+
+
+<template name="tagList">
+	<label for="tags">Tags</label>
+	<div class="newtag">
+		<i class="icon-plus"></i>
+		<input type="text" id="tags" class="newtagtitle _newtagtitle _placeholderChange" value="Nouveau tag..."></input>
+	</div>
+
+	<!-- NE PAS AFFICHER SI PAS DE TAGS -->
+	<div class="tagsList">
+		{{#each tags}}
+			{{> tag}} 
+		{{/each}}
+	</div>
+
+	
+</template>
+
+<template name="tag">
+	<span class="tagItem">
+		<span >{{title}}</span>
+		<span class="removeTag _removeTag {{_id}}">
+			<i class="icon-remove"></i>
+		</span>
+	</span>
 </template>
 
 

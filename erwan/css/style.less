@@ -74,8 +74,64 @@ body{
 	bottom: 0;
 	border-left: 1px solid #e8e7e3;
 	.cardDetails {
-		margin-left: 10px;
+		margin: 10px;
+		textarea {
+			.box-sizing(border-box);
+			width: 100%;
+		}
+		.newtag, .newnotetitle {
+			background: @bgNewCat;
+			.rounded(0px);
+			border-top: 4px solid darken(@bgNewCat,20%);
+			padding: 5px;
+			i {
+				position: relative;
+				top: -2px;
+				color: darken(@bgNewCat,10%);
+			}
+
+			input {
+				color: darken(@bgNewCat,25%);
+				.box-shadow(none);
+				background: @bgNewCat;
+				border:none;
+				&:focus {
+					border:none;
+					.box-shadow(none);
+				}
+			}
+		}
+		.notesList, .tagsList {
+			background: white;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			.inner-shadow(0, 2px, 5px, 0.2);
+			padding: 10px;
+			.note {
+				font-weight: 700;
+				font-size: 1.1em;
+				margin-bottom: 5px;
+				margin-top:5px;
+			
+			}
+		}
+		
 	}
+}
+
+.tagItem {
+	background: #f7f6f2;
+	border-top: 2px solid #0599eb;
+	padding: 3px 5px;
+	margin-left: 3px;
+	.removeTag {
+		color:@colorLight-05;
+		&:hover {
+			cursor:pointer;
+			color:#e5473c;
+		}
+	}
+
 }
 
 .espace-header {
