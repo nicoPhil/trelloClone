@@ -4,7 +4,7 @@ Template.categoryList.categoryList = function() {
 	});
 }
 
-Template.categoryList.categoryListWidth = function(){
+Template.categoryList.categoryListWidth = function() {
 	var nbCat = Template.categoryList.categoryList().count();
 	var catWidth = 275;
 	var totalWidth = nbCat * catWidth;
@@ -20,9 +20,9 @@ Template.categoryList.rendered = function() {
 function saveNewCat(e, templ) {
 	var title = templ.find("._newCatName").value;
 	if (title) {
-		categoryColl.insert({
-			title: title,
-			workspaceId: Session.get('workspaceId')
+		var workspaceId = Session.get('workspaceId');
+		Meteor.call('insertCategory', title, workspaceId, function() {
+
 		})
 	}
 
@@ -30,10 +30,21 @@ function saveNewCat(e, templ) {
 
 Template.categoryList.events({
 	'click ._newCatSave': saveNewCat,
-	'keypress ._newCatName':function(e,templ){
+	'keypress ._newCatName': function(e, templ) {
 		if (e.keyCode == 13) {
-			saveNewCat(e,templ);
+			saveNewCat(e, templ);
 			$(templ.find("._newCatName")).blur();
 		}
 	}
 });
+
+Template.header.events({
+	'click button': function() {
+		var user = $('input').val();
+		Session.set('user', user);
+	}
+})
+
+Template.header.user = function() {
+	return Session.get('user');
+};

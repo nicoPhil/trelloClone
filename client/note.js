@@ -6,21 +6,16 @@ function saveNewNote(e, templ) {
 		return;
 	}
 
-	cardColl.update({
-		_id: cardId
-	}, {
-		$push: {
-			notes: {
-				title: newnotetitle
-			}
-		}
-	})
+	Meteor.call('addNote', cardId, newnotetitle);
 
 }
 
-Template.noteList.notes = function(){
+Template.noteList.notes = function() {
 	var cardId = Session.get('cardId');
-	var ret =  cardColl.findOne({_id : cardId});
+	var ret = cardColl.findOne({
+		_id: cardId
+	});
+	ret = ret || {};
 	return ret.notes;
 }
 

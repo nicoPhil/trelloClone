@@ -1,3 +1,10 @@
+Meteor.subscribe("workspaceColl");
+Meteor.subscribe("cardColl");
+Meteor.subscribe("categoryColl");
+Meteor.subscribe("tagColl");
+
+
+
 function selectCard(id) {
   Session.set('cardId', id);
 }
@@ -52,12 +59,12 @@ function saveNewWorkspace(e, templ) {
   if (!newWorkspaceName) {
     return;
   }
-  var toInsert = {
-    name: newWorkspaceName
-  };
-  var newWorkspaceId = workspaceColl.insert(toInsert);
-  textInput.val('');
-  Session.set('workspaceId', newWorkspaceId);
+
+  Meteor.call('insertWorkspace', newWorkspaceName, function(err, newWorkspaceId) {
+    textInput.val('');
+    Session.set('workspaceId', newWorkspaceId);
+  })
+
 }
 
 Template.workspaceList.events({
@@ -106,19 +113,14 @@ Template.cardDetails.card = function() {
 Template.cardDetails.events({
   'click ._btnsave': function(e, templ) {
     var cardId = getCardId();
+    var title = templ.find("._inputTitle").value;
+    var description = templ.find("._inputDescription").value;
 
-    cardColl.update(cardId, {
-      $set: {
-        title: templ.find("._inputTitle").value,
-        description: templ.find("._inputDescription").value
-      }
-    });
+    Meteor.call('updateCard', cardId, title, description);
   },
   'click ._btndelete': function(e, templ) {
     var cardId = getCardId();
-    cardColl.remove({
-      _id: cardId
-    });
+    Meteor.call('removeCard', cardId);
   }
 });
 
@@ -137,11 +139,10 @@ function saveNewCard(e, templ) {
   if (!newcardtitle) {
     return;
   }
-  var newCardId = cardColl.insert({
-    categoryId: currentCatId,
-    title: newcardtitle
+  Meteor.call('insertCard', newcardtitle, currentCatId, function(err, newCardId) {
+    selectCard(newCardId);
   });
-  selectCard(newCardId);
+
 }
 
 Template.contentCards.events({
