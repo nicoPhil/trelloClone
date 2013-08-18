@@ -82,8 +82,17 @@ Template.barHaut.topTags = function() {
 
 function sessionAddOrRemoveTag(tagObj) {
 
+  var i, j;
+  var foundTag = false;
+  var tag, card;
+  var currentTagList = Session.get('currentTagList');
+  currentTagList = currentTagList || [];
+
+  var badCardList = [];
+
   function isCardInTagArray(cardId, tagArr) {
     var i = 0;
+
     for (i = 0; i < tagArr.length; i++) {
       if (tagArr[i].cardId == cardId) {
         return true;
@@ -92,13 +101,19 @@ function sessionAddOrRemoveTag(tagObj) {
     return false;
   }
 
-  var i, j;
-  var foundTag = false;
-  var tag, card;
-  var currentTagList = Session.get('currentTagList');
-  currentTagList = currentTagList || [];
+  function handleOneTag(tag) {
+    var cardArray = cardColl.find();
+    cardArray.forEach(function(card) {
+      console.log('cardArray.forEach');
+      if (!isCardInTagArray(card._id, tag.cards)) {
+        if ($.inArray(card._id, badCardList) == -1) {
+          badCardList.push(card._id);
+        }
+      }
+    })
+  }
 
-  var badCardList = [];
+
 
   for (i = 0; i < currentTagList.length; i++) {
     if (currentTagList[i].title == tagObj.title) {
@@ -111,19 +126,11 @@ function sessionAddOrRemoveTag(tagObj) {
     currentTagList.push(tagObj);
   }
 
-  var cardArray = cardColl.find();
+
 
   for (i = 0; i < currentTagList.length; i++) {
-    tag = currentTagList[i];
-
-    cardArray.forEach(function(card) {
-
-      if (!isCardInTagArray(card._id, tag.cards)) {
-        if ($.inArray(card._id, badCardList) == -1) {
-          badCardList.push(card._id);
-        }
-      }
-    })
+    console.log(currentTagList[i].title);
+    handleOneTag(currentTagList[i]);
   }
 
   Session.set('badCardList', badCardList);
