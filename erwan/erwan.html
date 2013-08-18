@@ -15,7 +15,11 @@
 	<div class="navbar header-bar">
 		<div class="navbar-inner">
 			<a class="brand" href="#"></a>
-			{{loginButtons}}
+
+			<div class="nav pull-right">
+				{{loginButtons}}
+			</div>
+
 		</div>
 	</div>
 </template>
@@ -36,6 +40,17 @@
 			</div>
 			<div class="tagsList">
 				<ul>
+
+
+					{{#each topTags}}
+					<li>
+							<span class="tagItem">
+								<span>{{title}}</span>
+							</span>
+					</li>
+					{{/each}}
+
+
 					<li>
 							<span class="tagItem selected">
 								<span>test</span>

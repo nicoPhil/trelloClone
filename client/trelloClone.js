@@ -39,9 +39,13 @@ Template.content.selectedCard = function() {
 
 Template.barHaut.events({
   'click ._deletewWorkspace': function() {
+<<<<<<< HEAD
     workspaceColl.remove({
       _id: this._id
     });
+=======
+    Meteor.call('removeWorkspace', this._id);
+>>>>>>> debut filtres tags
     selectWorkspace(null);
   }
 });
@@ -53,6 +57,14 @@ Template.barHaut.workspace = function() {
   });
 }
 
+<<<<<<< HEAD
+=======
+Template.barHaut.topTags = function() {
+  return tagColl.find({}, {sort: {ndCards: -1}})
+}
+
+
+>>>>>>> debut filtres tags
 function saveNewWorkspace(e, templ) {
   var textInput = $(templ.find("._newespacename"));
   var newWorkspaceName = textInput.val();

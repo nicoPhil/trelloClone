@@ -40,6 +40,14 @@ Meteor.methods({
 		});
 		return newId;
 	},
+<<<<<<< HEAD
+=======
+	removeWorkspace: function(workspaceId) {
+		workspaceColl.remove({
+			_id: workspaceId
+		});
+	},
+>>>>>>> debut filtres tags
 	insertCategory: function(title, workspaceId) {
 		var newId = categoryColl.insert({
 			title: title,
@@ -84,7 +92,11 @@ Meteor.methods({
 		if (!isAllowedToModifyCard(cardId, this.userId)) {
 			return;
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> debut filtres tags
 		cardColl.update({
 			_id: cardId
 		}, {
@@ -95,4 +107,59 @@ Meteor.methods({
 			}
 		})
 	},
+<<<<<<< HEAD
+=======
+	addTag: function(cardId, tag) {
+		var foundTag = tagColl.findOne({
+			title: tag,
+			userId: this.userId
+		});
+
+		if (foundTag) {
+			tagColl.update({
+				_id: foundTag._id
+			}, {
+				$inc: {
+					nbCards: 1
+				},
+				$push: {
+					cards: {
+						cardId: cardId
+					}
+				}
+			})
+		} else {
+			tagColl.insert({
+				title: tag,
+				userId: this.userId,
+				nbCards: 1,
+				cards: [{
+					cardId: cardId
+				}]
+			});
+		}
+	},
+	removeTag: function(cardId, tagId) {
+		tagColl.update({
+			_id: tagId
+		}, {
+			$inc: {
+					nbCards: -1
+				},
+			$pull: {
+				cards: {
+					cardId: cardId
+				}
+			}
+		});
+
+		if (tagColl.findOne({
+			_id: tagId
+		}).cards.length == 0) {
+			tagColl.remove({
+				_id: tagId
+			});
+		}
+	},
+>>>>>>> debut filtres tags
 });

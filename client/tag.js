@@ -42,6 +42,7 @@ function saveNewTag(e, templ) {
 		return;
 	}
 
+<<<<<<< HEAD
 	var foundTag = tagColl.findOne({
 		title: newtagtitle
 	});
@@ -64,11 +65,15 @@ function saveNewTag(e, templ) {
 			}]
 		});
 	}
+=======
+	Meteor.call('addTag', cardId, newtagtitle);
+>>>>>>> debut filtres tags
 }
 
 function removeTag(e, templ) {
 	var cardId = getCurrentCardId();
 	var tagId = e.currentTarget.classList[2];
+<<<<<<< HEAD
 	tagColl.update({
 		_id: tagId
 	}, {
@@ -82,6 +87,9 @@ function removeTag(e, templ) {
 	if(tagColl.findOne({_id: tagId}).cards.length == 0){
 		tagColl.remove({_id: tagId});
 	}
+=======
+	Meteor.call('removeTag', cardId, tagId);
+>>>>>>> debut filtres tags
 }
 
 Template.tagList.events({
