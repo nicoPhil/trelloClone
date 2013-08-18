@@ -40,14 +40,13 @@ Meteor.methods({
 		});
 		return newId;
 	},
-<<<<<<< HEAD
-=======
+
 	removeWorkspace: function(workspaceId) {
 		workspaceColl.remove({
 			_id: workspaceId
 		});
 	},
->>>>>>> debut filtres tags
+
 	insertCategory: function(title, workspaceId) {
 		var newId = categoryColl.insert({
 			title: title,
@@ -92,11 +91,7 @@ Meteor.methods({
 		if (!isAllowedToModifyCard(cardId, this.userId)) {
 			return;
 		}
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> debut filtres tags
 		cardColl.update({
 			_id: cardId
 		}, {
@@ -107,8 +102,7 @@ Meteor.methods({
 			}
 		})
 	},
-<<<<<<< HEAD
-=======
+
 	addTag: function(cardId, tag) {
 		var foundTag = tagColl.findOne({
 			title: tag,
@@ -161,5 +155,5 @@ Meteor.methods({
 			});
 		}
 	},
->>>>>>> debut filtres tags
+
 });
