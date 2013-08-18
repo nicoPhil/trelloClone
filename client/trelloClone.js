@@ -53,10 +53,90 @@ Template.barHaut.workspace = function() {
 }
 
 
-Template.barHaut.topTags = function() {
-  return tagColl.find({}, {sort: {ndCards: -1}})
+Template.barHaut.selected = function() {
+
+  var currentTagList = Session.get('currentTagList');
+  var i;
+  if (!currentTagList) {
+    return '';
+  }
+
+  for (var i = 0; i < currentTagList.length; i++) {
+    if (this.title == currentTagList[i].title) {
+      return 'selected';
+    }
+
+  }
+
+  return '';
 }
 
+Template.barHaut.topTags = function() {
+  console.log('topTags');
+  return tagColl.find({}, {
+    sort: {
+      ndCards: -1
+    }
+  })
+}
+
+function sessionAddOrRemoveTag(tagObj) {
+
+  function isCardInTagArray(cardId, tagArr) {
+    var i = 0;
+    for (i = 0; i < tagArr.length; i++) {
+      if (tagArr[i].cardId == cardId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  var i, j;
+  var foundTag = false;
+  var tag, card;
+  var currentTagList = Session.get('currentTagList');
+  currentTagList = currentTagList || [];
+
+  var badCardList = [];
+
+  for (i = 0; i < currentTagList.length; i++) {
+    if (currentTagList[i].title == tagObj.title) {
+      foundTag = true;
+      currentTagList.splice(i, 1);
+    }
+  }
+
+  if (!foundTag) {
+    currentTagList.push(tagObj);
+  }
+
+  var cardArray = cardColl.find();
+
+  for (i = 0; i < currentTagList.length; i++) {
+    tag = currentTagList[i];
+
+    cardArray.forEach(function(card) {
+
+      if (!isCardInTagArray(card._id, tag.cards)) {
+        if ($.inArray(card._id, badCardList) == -1) {
+          badCardList.push(card._id);
+        }
+      }
+    })
+  }
+
+  Session.set('badCardList', badCardList);
+  Session.set('currentTagList', currentTagList);
+}
+
+
+
+Template.barHaut.events({
+  'click ._tagItem': function(e, templ) {
+    sessionAddOrRemoveTag(this);
+  },
+});
 
 function saveNewWorkspace(e, templ) {
   var textInput = $(templ.find("._newespacename"));
@@ -114,6 +194,21 @@ Template.cardDetails.card = function() {
     _id: getCardId()
   });
 }
+
+Template.card.hiddenCard = function() {
+  var arr = Session.get('badCardList');
+  if (!arr) {
+    return '';
+  }
+
+  var found = ($.inArray(this._id, arr) != -1);
+  console.log(found);
+
+  if (found) {
+    return 'hiddenCard';
+  }
+}
+
 
 Template.cardDetails.events({
   'click ._btnsave': function(e, templ) {

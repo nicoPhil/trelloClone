@@ -44,47 +44,12 @@
 
 					{{#each topTags}}
 					<li>
-							<span class="tagItem">
-								<span>{{title}}</span>
+							<span class="tagItem _tagItem {{selected}}">
+								<span>{{title}}({{nbCards}})</span>
 							</span>
 					</li>
 					{{/each}}
 
-
-					<li>
-							<span class="tagItem selected">
-								<span>test</span>
-								<span class="removeTag _removeTag {{_id}}">
-									<i class="icon-remove"></i>
-								</span>
-							</span>
-					</li>
-					<li>
-							<span class="tagItem selected">
-								<span>test</span>
-								<span class="removeTag _removeTag {{_id}}">
-									<i class="icon-remove"></i>
-								</span>
-							</span>
-					</li>
-
-					<li>
-							<span class="tagItem">
-								<span>test</span>
-							</span>
-					</li>
-
-					<li>
-							<span class="tagItem">
-								<span>test</span>
-							</span>
-					</li>
-
-					<li>
-							<span class="tagItem">
-								<span>test</span>
-							</span>
-					</li>
 				</ul>
 			</div>
 		</div>
@@ -196,7 +161,7 @@
 
 <!-- 1 carte -->
 <template name="card">
-		<div class="cardItem _cardItem {{selected}}">
+		<div class="cardItem _cardItem {{selected}} {{hiddenCard}}">
 			<span class="cardTitle">{{title}}</span>
 			<div class="cardDesc">
 				{{description}}
