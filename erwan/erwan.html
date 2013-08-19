@@ -39,18 +39,20 @@
 				{{/with}}
 			</div>
 			<div class="tagsList">
-				<ul>
+					<!-- AFFICHER SEULEMENT SI IL Y A DES TAGS -->
+					<span class="pull-left label-white">
+						Afficher : 
+					</span>
+					<ul class="pull-left">
+						{{#each topTags}}
+						<li>
+								<span class="tagItem _tagItem {{selected}}">
+									<span>{{title}}  <span class="nbCards">{{nbCards}} </span></span>
+								</span>
+						</li>
+						{{/each}}
+					</ul>
 
-
-					{{#each topTags}}
-					<li>
-							<span class="tagItem _tagItem {{selected}}">
-								<span>{{title}}({{nbCards}})</span>
-							</span>
-					</li>
-					{{/each}}
-
-				</ul>
 			</div>
 		</div>
 		
@@ -106,7 +108,6 @@
 		{{/each}}
 		<div class="category">
 			<div class="new-category">
-				<i class="icon-list"></i>
 				<input type="text" class="_newCatName _placeholderChange" value="Nouvelle catégorie"></input>
 				<button class="_newCatSave hide">+</button>	
 			</div>

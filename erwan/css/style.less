@@ -58,6 +58,7 @@ body{
 	padding-top: 10px;
 	padding-bottom: 12px;
 	/*overflow: scroll;*/
+	padding-left: 5px;
 	.category-wrapper {
 		white-space: nowrap;
 		overflow-x:auto;
@@ -153,36 +154,59 @@ body{
 		}
 
 		.espace-name {
+			min-height: 60px;
 			width:@widthSideBar - 20;
 			border-right:1px solid darken(@sideBar,10%);
 			.box-shadow(1px 0px 0px @sideBar);
 			float: left;
 			.deleteSpace {
-				position: relative;
-				top:-8px;
+				display: none;
+				position: absolute;
+				top:10px;
 			}	
+			&:hover {
+				.deleteSpace {
+					display: inline-block;
+				}
+				
+			}
 		}
 		.tagsList {
 				float: left;
 				position: relative;
 				top: 20px;
-				ul li {
-					list-style: none;
-					display: inline-block;
+				.label-white {
+					color: white;
+					margin-left: 10px;
+				}
+				ul {
+					margin-left: 5px;
+					li {
+						list-style: none;
+						display: inline-block;
+					}
 				}
 				.tagItem {
 					padding: 7px;
 					border:1px solid #181a1f;
 					font-size: 1.1em;
 					.gradient(#21242b,#21242b,#32363f);
+					.inner-shadow-white(0, 0, 3px, 0.2);
 					color:#555b6b;
 					&.selected {
 						color: white;
-						.drop-shadow(0, 0, 2px, 1)
+						.box-shadow(0 0px 2px rgba(0,0,0,1));
+						border:1px solid @mainColor;
 					}
 					&:hover {
 						color: white;
 						cursor: pointer;
+					}
+					.nbCards {
+						color: lighten(@mainColor,10%);
+						font-size: 0.8em;
+						font-weight: 300;
+						font-style: italic;
 					}
 				}
 			}
@@ -198,11 +222,16 @@ body{
 		cursor: pointer;
 		color: #a3a2a0;
 		font-size: 1.2em;
+		border-top: 1px solid lighten(@sideBar,2%);
 		&.selected {
 			color: lighten(@colorLight,10%);
 			font-weight: bold;
-			background-color: lighten(@sideBar,5%);
+			background-color: darken(@sideBar,5%);
 			border-left: 3px solid @mainColor;
+			.inner-shadow(0,0px,2px,0.8);
+			&:hover {
+				background-color: darken(@sideBar,5%);
+			}
 		}
 		&:hover {
 			background-color: lighten(@sideBar,5%);
@@ -231,16 +260,27 @@ body{
 .left {
 	float: left;
 	display: inline;
+	&:first-child{
+		margin-left:5px;
+	}
 }
 
 .category{
-	border:none !important;
+	
 	padding:0px !important;
 	/*float: left;*/
 	position: relative;
+	border:1px solid #e4e4e2;
 	width: 180px;
 	display: inline-block;
+	margin-right: 5px;
+	background: white;
+	h5 {
+		background: #e0e0e0;
+		padding: 10px;
+		margin: 0;
 
+	}
 	.new-category {
 		background: @bgNewCat;
 		border-top: 4px solid darken(@bgNewCat,20%);
@@ -256,6 +296,7 @@ body{
 		input {
 			.box-sizing(border-box);
 			width: 94%;
+			margin-bottom: 5px;
 			color: darken(@bgNewCat,25%);
 			.box-shadow(none);
 			background: @bgNewCat;
@@ -265,9 +306,9 @@ body{
 				.box-shadow(none);
 			}
 		}
-	}
-	&:first-child{
-		margin-left:10px;
+		&:hover {
+			border-top-color: @mainColor;
+		}
 	}
 }
 
@@ -293,25 +334,19 @@ zoom: 1;
 
 .cardList {
 	// padding: 10px;
-	margin-right: 10px;
-	/*background: white;*/
+	
 	/*border:1px solid #e4e4e2;*/
-
+	
 	.cardItem{
-		border:1px solid #e4e4e2;
+		/*border:1px solid #e4e4e2;*/
 		padding: 15px;
-		cursor: pointer;
-		margin: 5px 0px;
-		background: white;
-		border-left:3px solid #e4e4e2;
-		.rounded(2px);
-		/*border-bottom: 1px dashed darken(@colorLight,5%);*/
+		cursor: pointer;		
+		border-left:3px solid #e7e7e5;
+		border-top: 1px solid #f7f7f7;
+		/*.rounded(2px);*/
 		&.selected {
-/*			background-color: @mainColor;
-			color: white;*/
-			border:1px solid @mainColor;
 			border-left:3px solid @mainColor;
-			/*.box-shadow(0px 0px 2px 2px @mainColor);*/
+			background: #f7dfca;
 		}
 
 		
@@ -347,10 +382,12 @@ zoom: 1;
 		padding:10px;
 		// padding-bottom: 5px;
 		background: white;
+		margin-top: 5px;
+		margin-bottom: 5px;
 		/*border-bottom: 1px dashed darken(@colorLight,5%);*/
-		border:1px solid #e4e4e2;
-		.inner-shadow(1px, 1px, 1px, 0.1);
-		.rounded(2px);
+		
+		/*.inner-shadow(1px, 1px, 1px, 0.1);*/
+		/*.rounded(2px);*/
 		.newcardtitle {
 			border:none;
 			background: white;

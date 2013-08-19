@@ -6,7 +6,7 @@ Template.categoryList.categoryList = function() {
 
 Template.categoryList.categoryListWidth = function() {
 	var nbCat = Template.categoryList.categoryList().count();
-	var catWidth = 275;
+	var catWidth = 200;
 	var totalWidth = nbCat * catWidth;
 	return totalWidth + "px";
 }
