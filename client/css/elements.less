@@ -20,7 +20,8 @@
                                    @stop 100%);
   background: -o-linear-gradient(@stop,
                                  @start);
-  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
+  /*filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));*/
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {
   background: @color;
